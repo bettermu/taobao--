@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .clear{zoom:0;}
+        .clear:after{content:'';display:block;clear:both;}
+        ul{margin:0;padding:0;list-style:none}
+        a{text-decoration:none;}
+        #box{width:294px;margin:50px auto;border:1px solid #ff6300; padding:3px 4px 5px 0;}
+        #left{float:left;width:52px; height:210px;}
+        #left li,#right li{border:1px solid #ffadad;width:48px; height:26px;margin:2px;background:url(pic/li_bg.jpg) repeat-x;}
+        #left a,#right a{display:block;line-height:26px;height:26px;text-align:center;}
+        img{width:190px; height:210px;}
+        #right{float:right;width:52px; height:210px;}
+
+    </style>
+    <script>
+        window.onload=function(){
+            var oBox=document.getElementById('box');
+            var aLi=oBox.getElementsByTagName('li');
+            var oImg=oBox.getElementsByTagName('img')[0];
+            var arr=['pic/1.jpg','pic/2.jpg','pic/3.jpg','pic/4.jpg','pic/5.jpg','pic/6.jpg','pic/7.jpg','pic/8.jpg','pic/9.jpg','pic/10.jpg','pic/11.jpg','pic/12.jpg','pic/13.jpg','pic/14.jpg'];
+            var num=0;
+            var timer=null;
+            var onOff=true;
+             function show(){
+                 timer=setInterval(function(){
+                    if(onOff){
+                        num++;
+
+                        if(num==aLi.length/2){
+                            num=aLi.length-1;
+                            onOff=false;
+                        }
+                        fn();
+                    }
+                     else{
+                        num--;
+
+                        if(num==aLi.length/2-1){
+                            num=0;
+                            onOff=true;
+                        }
+                        fn();
+                    }
+                 function fn(){for(var i=0;i<aLi.length;i++){
+                     aLi[i].style.background='';
+                 }
+                     aLi[num].style.background='url(pic/li_bg_active.jpg) repeat-x';
+                     oImg.src=arr[num];}
+             },500);
+             }
+            show();
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].index=i;
+
+                aLi[i].onmouseover=function(){
+                    clearInterval(timer);
+                    num=this.index;
+                    for(i=0;i<aLi.length;i++){
+                        aLi[i].style.background='';
+                    }
+                    aLi[num].style.background='url(pic/li_bg_active.jpg) repeat-x';
+                    oImg.src=arr[num];
+
+                };
+                aLi[i].onmouseout=show;
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div id="box" class="clear">
+    <ul id="left">
+        <li style="background:url(pic/li_bg_active.jpg) repeat-x;"><a href="#">宠物一</a></li>
+        <li><a href="#">宠物二</a></li>
+        <li><a href="#">宠物三</a></li>
+        <li><a href="#">宠物四</a></li>
+        <li><a href="#">宠物五</a></li>
+        <li><a href="#">宠物六</a></li>
+        <li><a href="#">宠物七</a></li>
+    </ul>
+    <img src="pic/1.jpg" alt=""/>
+    <ul id="right">
+        <li><a href="#">宠物八</a></li>
+        <li><a href="#">宠物九</a></li>
+        <li><a href="#">宠物十</a></li>
+        <li><a href="#">动漫一</a></li>
+        <li><a href="#">动漫二</a></li>
+        <li><a href="#">动漫三</a></li>
+        <li><a href="#">动漫四</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
